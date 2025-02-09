@@ -47,8 +47,6 @@ RUN git checkout ${BEANCOUNT_VERSION}
 
 RUN CFLAGS=-s pip3 install -U /tmp/build/beancount
 RUN pip3 install -U /tmp/build/fava
-ADD requirements.txt .
-RUN pip3 install --require-hashes -U -r requirements.txt
 RUN pip3 install git+https://github.com/beancount/beanprice.git@22c3a23e44c8463634e7dc22fc7e9981a70b0673
 RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@bc232bdd52312d5aba4362493ec523b728953860
 
