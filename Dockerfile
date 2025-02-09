@@ -1,5 +1,5 @@
-ARG BEANCOUNT_VERSION=2.3.6
-ARG FAVA_VERSION=v1.30
+ARG BEANCOUNT_VERSION=3.1.0
+ARG FAVA_VERSION=v1.30.1
 
 ARG NODE_BUILD_IMAGE=22-bookworm
 FROM node:${NODE_BUILD_IMAGE} AS node_build_env
@@ -24,7 +24,7 @@ RUN rm -rf .*cache && \
     find . -type d -name "__pycache__" -delete
 
 # Why not use `python:bookworm`? Because the final app is served by
-# distroless Python image, which is Debian + Python from Debain APT
+# distroless Python image, which is Debian + Python from Debian APT
 # repo. The python intepreter in the `python:bookworm` image is not from
 # Debian APT repo.
 FROM debian:bookworm AS build_env
@@ -32,7 +32,7 @@ ARG BEANCOUNT_VERSION
 
 RUN apt-get update
 RUN apt-get install -y build-essential libxml2-dev libxslt-dev curl \
-        python3 libpython3-dev python3-pip git python3-venv
+        python3 libpython3-dev python3-pip git python3-venv bison flex
 
 
 ENV PATH="/app/bin:$PATH"
@@ -49,8 +49,8 @@ RUN CFLAGS=-s pip3 install -U /tmp/build/beancount
 RUN pip3 install -U /tmp/build/fava
 ADD requirements.txt .
 RUN pip3 install --require-hashes -U -r requirements.txt
-RUN pip3 install git+https://github.com/beancount/beanprice.git@41576e2ac889e4825e4985b6f6c56aa71de28304
-RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@de68b54f3ac517adfde3a4ccb41fdb09a0da41d1
+RUN pip3 install git+https://github.com/beancount/beanprice.git@22c3a23e44c8463634e7dc22fc7e9981a70b0673
+RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@bc232bdd52312d5aba4362493ec523b728953860
 
 RUN pip3 uninstall -y pip
 
