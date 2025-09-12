@@ -47,8 +47,8 @@ RUN git checkout ${BEANCOUNT_VERSION}
 
 RUN CFLAGS=-s pip3 install -U /tmp/build/beancount
 RUN pip3 install -U /tmp/build/fava
-RUN pip3 install git+https://github.com/beancount/beanprice.git@f649ae69edd5a8c7ee2618dfebd219cc0119635f
-RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@2989dab132b4ddda3f2256a0703b54cc69c4acf5
+RUN pip3 install git+https://github.com/beancount/beanprice.git@v2.1.0
+RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@c46c1945d0b6f5a1f075c650e882ac74a826e8f0
 
 RUN pip3 uninstall -y pip
 
