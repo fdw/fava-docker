@@ -1,5 +1,5 @@
-ARG BEANCOUNT_VERSION=3.1.0
-ARG FAVA_VERSION=v1.30.5
+ARG BEANCOUNT_VERSION=3.2.0
+ARG FAVA_VERSION=v1.30.6
 
 ARG NODE_BUILD_IMAGE=22-bookworm
 FROM node:${NODE_BUILD_IMAGE} AS node_build_env
@@ -48,7 +48,7 @@ RUN git checkout ${BEANCOUNT_VERSION}
 RUN CFLAGS=-s pip3 install -U /tmp/build/beancount
 RUN pip3 install -U /tmp/build/fava
 RUN pip3 install git+https://github.com/beancount/beanprice.git@v2.1.0
-RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@c46c1945d0b6f5a1f075c650e882ac74a826e8f0
+RUN pip3 install git+https://github.com/andreasgerstmayr/fava-portfolio-returns.git@6961c080686583eff64626c4462d6e6a0ae3b9b6
 
 RUN pip3 uninstall -y pip
 
